@@ -126,6 +126,9 @@ Feel free to explore and customize your `<FacekiSDK>` integration! 👩‍💻�
 
 ## Change Log
 
+* 2024-02-28 -- 1.0.3
+  * Read Me Updates
+
 * 2024-02-28 -- 1.0.2
   * Added External Terms and Condition URL. 
   * Added Quality Check
