@@ -1,0 +1,86 @@
+{
+  "name": "@faceki/blaze-kyc-react-sdk",
+  "version": "1.0.2",
+  "private": false,
+  "description": "Faceki eKYC Blaze 3.0 React SDK",
+  "license": "MIT",
+  "author": "Faceki <tech@faceki.com>",
+  "main": "dist/cjs/component/facekiSdk.js",
+  "module": "dist/esm/component/facekiSdk.js",
+  "types": "dist/esm/component/facekiSdk.d.ts",
+  "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.14.3",
+    "@mui/material": "^5.14.4",
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^27.5.2",
+    "@types/node": "^16.18.40",
+    "@types/react": "^18.2.20",
+    "@types/react-dom": "^18.2.7",
+    "axios": "^1.4.0",
+    "is-mobile": "^4.0.0",
+    "lottie-react": "^2.4.0",
+    "react": "^18.2.0",
+    "react-device-detect": "^2.2.3",
+    "react-dom": "^18.2.0",
+    "react-in-viewport": "^1.0.0-alpha.30",
+    "react-material-ui-carousel": "^3.4.2",
+    "react-router-dom": "^6.15.0",
+    "react-scripts": "5.0.1",
+    "react-toastify": "^9.1.3",
+    "react-webcam": "^7.1.1",
+    "typescript": "^4.9.5",
+    "web-vitals": "^2.1.4"
+  },
+  "devDependencies": {
+    "@babel/core": "7.22.5",
+    "@babel/eslint-parser": "7.22.5",
+    "@babel/plugin-proposal-private-property-in-object": "7.21.11",
+    "@babel/preset-env": "7.22.5"
+},
+  "scripts": {
+    "start": "HTTPS=true react-scripts start",
+    "startLocal": "react-scripts start",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "build": "yarn build:esm && yarn build:cjs",
+    "build:esm": "rm -rf dist && tsc && mkdir  -p ./dist/cjs/assets && cp -r ./src/assets ./dist/cjs/  && mkdir  -p ./dist/esm/assets && cp -r ./src/assets ./dist/esm/",
+    "build:cjs": "tsc --module commonjs --outDir dist/cjs"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "keywords": [
+    "react",
+    "react-native",
+    "react-component",
+    "kyc",
+    "faceki",
+    "ID verification",
+    "plugin",
+    "know your customer",
+    "blaze"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/faceki/blaze-kyc-react-sdk.git"
+  }
+}
