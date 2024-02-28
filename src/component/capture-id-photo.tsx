@@ -19,10 +19,10 @@ import zIndex from "@mui/material/styles/zIndex";
 import { ArrowBack, InfoOutlined } from "@mui/icons-material";
 import ReplayIcon from "@mui/icons-material/Replay";
 import { useClientContext } from "./mainContext";
-import       LoadingDialog from './smallLoader'
-import axios from 'axios';
+import LoadingDialog from "./smallLoader";
+import axios from "axios";
 import { DataURIToBlob } from "../helpers/common";
-import {toast} from 'react-toastify'
+import { toast } from "react-toastify";
 
 var mobile = require("is-mobile");
 
@@ -64,7 +64,6 @@ export default function CaptureIdPhoto(props: any) {
         const imageSrc = canvas.toDataURL("image/jpeg");
         setImg(imageSrc);
 
-   
         var formData = new FormData();
         formData.append("image", DataURIToBlob(imageSrc), "image_r.jpg");
         setLoading(true);
@@ -74,7 +73,7 @@ export default function CaptureIdPhoto(props: any) {
           .post("https://addon.faceki.com/advance/detect", formData)
           .then((res) => {
             setImageQuality(res.data);
-            
+
             if (
               !res.data.quality ||
               (props?.side == "f"
@@ -91,10 +90,9 @@ export default function CaptureIdPhoto(props: any) {
           .finally(() => {
             setLoading(false);
           });
-
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
       // showErrorToast("Error", "Failed to capture photo.");
     }
   };
@@ -103,7 +101,7 @@ export default function CaptureIdPhoto(props: any) {
     try {
       setImg(null);
       setState("capturing");
-      setImg(null)
+      setImg(null);
     } catch (error) {}
   };
 
@@ -173,8 +171,11 @@ export default function CaptureIdPhoto(props: any) {
                   >
                     <img
                       src={
-                        require('../assets/images/cardbg.png').default || require('../assets/images/cardbg.png') ||
-                        undefined
+                        clientContext?.theme?.nextJSImages
+                          ? "https://facekiassets.faceki.com/public/kyc-verify/cardbg.png"
+                          : require("../assets/images/cardbg.png").default ||
+                            require("../assets/images/cardbg.png") ||
+                            undefined
                       }
                       alt=""
                       style={{
@@ -293,7 +294,7 @@ export default function CaptureIdPhoto(props: any) {
                               sx={{
                                 padding: 0,
                               }}
-                              style={{opacity:0}}
+                              style={{ opacity: 0 }}
                             >
                               <InfoOutlined
                                 sx={{
@@ -326,7 +327,6 @@ export default function CaptureIdPhoto(props: any) {
                               color: "white",
                               px: 2,
                             }}
-                           
                           >
                             {props.side === "f"
                               ? String(props?.documenName)?.split("_")[0] ==
@@ -359,7 +359,6 @@ export default function CaptureIdPhoto(props: any) {
                             alignItems="center"
                             flex={1}
                           >
-                            
                             <IconButton
                               onClick={() => setSelfieMode(!selfieMode)}
                             >
@@ -368,7 +367,7 @@ export default function CaptureIdPhoto(props: any) {
                                   clientContext?.theme?.iconTextColor ?? "white"
                                 }
                                 style={{
-                                  color:"white"
+                                  color: "white",
                                 }}
                               />
                             </IconButton>
@@ -381,7 +380,6 @@ export default function CaptureIdPhoto(props: any) {
                             >
                               Flip Camera
                             </Typography>
-                            
                           </Box>
                         </Grid>
                         <Grid
@@ -439,15 +437,13 @@ export default function CaptureIdPhoto(props: any) {
                             </Typography>
                           </Box>
                         </Grid>
-                        <Grid item style={{opacity:0}}>
+                        <Grid item style={{ opacity: 0 }}>
                           <Box
                             display="flex"
                             flexDirection="column"
                             alignItems="center"
                             flex={1}
-                            
                           >
-                            
                             <IconButton
                               onClick={() => setSelfieMode(!selfieMode)}
                             >
@@ -466,7 +462,6 @@ export default function CaptureIdPhoto(props: any) {
                             >
                               Flip Camera
                             </Typography>
-                            
                           </Box>
                         </Grid>
                       </Grid>
@@ -509,8 +504,11 @@ export default function CaptureIdPhoto(props: any) {
               >
                 <img
                   src={
-                   require('../assets/images/cardbg.png').default || require('../assets/images/cardbg.png') || 
-                    undefined
+                    clientContext?.theme?.nextJSImages
+                      ? "https://facekiassets.faceki.com/public/kyc-verify/cardbg.png"
+                      : require("../assets/images/cardbg.png").default ||
+                        require("../assets/images/cardbg.png") ||
+                        undefined
                   }
                   alt=""
                   style={{
@@ -629,7 +627,7 @@ export default function CaptureIdPhoto(props: any) {
                           sx={{
                             padding: 0,
                           }}
-                          style={{opacity:0}}
+                          style={{ opacity: 0 }}
                         >
                           <InfoOutlined
                             sx={{
@@ -832,8 +830,8 @@ export default function CaptureIdPhoto(props: any) {
                       px: 2,
                     }}
                     style={{
-                      backgroundColor:  clientContext?.theme?.textBg || "#f8b427"
-
+                      backgroundColor:
+                        clientContext?.theme?.textBg || "#f8b427",
                     }}
                   >
                     {props.side === "f"
@@ -896,7 +894,12 @@ export default function CaptureIdPhoto(props: any) {
                     flex={1}
                   >
                     <IconButton onClick={() => setSelfieMode(!selfieMode)}>
-                    <FlipCameraIos style={{color: clientContext?.theme?.iconTextColor || "#f8b427" }}  />
+                      <FlipCameraIos
+                        style={{
+                          color:
+                            clientContext?.theme?.iconTextColor || "#f8b427",
+                        }}
+                      />
                     </IconButton>
                     <Typography
                       color={
@@ -921,7 +924,8 @@ export default function CaptureIdPhoto(props: any) {
                         borderWidth: "1px",
                         borderStyle: "solid",
 
-                        borderColor: clientContext?.theme?.iconTextColor || "#f8b427" ,
+                        borderColor:
+                          clientContext?.theme?.iconTextColor || "#f8b427",
                       }}
                     >
                       <IconButton
@@ -930,7 +934,12 @@ export default function CaptureIdPhoto(props: any) {
                           backgroundColor: "#F6F6F7",
                         }}
                       >
-                        <CameraAlt style={{color:clientContext?.theme?.iconTextColor || "#f8b427" }}/>
+                        <CameraAlt
+                          style={{
+                            color:
+                              clientContext?.theme?.iconTextColor || "#f8b427",
+                          }}
+                        />
                       </IconButton>
                     </Box>
                     <Typography
@@ -1029,9 +1038,7 @@ export default function CaptureIdPhoto(props: any) {
         </KycVerifyCardContainer>
       )}
 
-
-  <LoadingDialog show={loading} message={"Quality check in progress..."} />
-
+      <LoadingDialog show={loading} message={"Quality check in progress..."} />
     </div>
   );
 }

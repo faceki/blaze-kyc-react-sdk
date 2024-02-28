@@ -127,14 +127,24 @@ export default function MainWrapper(props: any) {
             flexDirection="row"
             justifyContent="space-between"
           >
-            <img src={require('../assets/images/kyc-verify/footer-logo.png').default || require('../assets/images/kyc-verify/footer-logo.png')} height={25} width={60} />
+            <img
+              src={
+                clinetContext?.theme?.nextJSImages
+                  ? "https://facekiassets.faceki.com/public/kyc-verify/footer-logo.png"
+                  : require("../assets/images/kyc-verify/footer-logo.png")
+                      .default ||
+                    require("../assets/images/kyc-verify/footer-logo.png")
+              }
+              height={25}
+              width={60}
+            />
             {props.onConfirm ? (
               <Button
                 onClick={() => {
                   props.onConfirm?.();
                 }}
                 style={{
-                  backgroundColor:clinetContext?.theme?.buttonbg || "#f8b427"
+                  backgroundColor: clinetContext?.theme?.buttonbg || "#f8b427",
                 }}
                 variant={"contained"}
               >
@@ -155,8 +165,17 @@ export default function MainWrapper(props: any) {
               width: "90%",
             }}
           >
- 
-            <img src={ require('../assets/images/kyc-verify/footer-logo.png').default || require('../assets/images/kyc-verify/footer-logo.png') || undefined} height={25} width={60} />
+            <img
+              src={
+                clinetContext?.theme?.nextJSImages
+                  ? "https://facekiassets.faceki.com/public/kyc-verify/footer-logo.png"
+                  : require("../assets/images/kyc-verify/footer-logo.png")
+                      .default ||
+                    require("../assets/images/kyc-verify/footer-logo.png")
+              }
+              height={25}
+              width={60}
+            />
             {props.onConfirm ? (
               <Button
                 onClick={() => {
@@ -164,7 +183,7 @@ export default function MainWrapper(props: any) {
                 }}
                 variant={"contained"}
                 style={{
-                  backgroundColor:clinetContext?.theme?.buttonbg || "#f8b427"
+                  backgroundColor: clinetContext?.theme?.buttonbg || "#f8b427",
                 }}
               >
                 {props.confirmButtonText ?? "Next >"}

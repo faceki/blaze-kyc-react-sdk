@@ -1,6 +1,6 @@
 {
   "name": "@faceki/blaze-kyc-react-sdk",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "private": false,
   "description": "Faceki eKYC Blaze 3.0 React SDK",
   "license": "MIT",

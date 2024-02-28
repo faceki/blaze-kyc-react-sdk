@@ -151,33 +151,11 @@ export default function CaptureIdPhoto(props: any) {
                     }}
                   >
                     <img
-                      // src={
-                      //   "https://faceki.com/backend/assets/verify/img/shape/selfie.png" ??
-                      //   undefined
-                      // }
-                      src={require("../assets/images/selfie.png").default || require("../assets/images/selfie.png")}
-                      
-                      alt=""
-                      style={{
-                        objectFit: "fill",
-                        height: "inherit",
-                        width: "100vw",
-                      }}
-                    />
-                  </div>
-                  {/* <div
-                    style={{
-                      width: "100%",
-                      height: "100%",
-                      maxHeight: "100vh",
-                      position: "absolute",
-                      top: 0,
-                    }}
-                  >
-                    <img
                       src={
-                        "https://faceki.com/backend/assets/verify/img/shape/pattern.png" ??
-                        undefined
+                        clinetContext?.theme?.nextJSImages
+                          ? "https://facekiassets.faceki.com/public/kyc-verify/selfie_overlay.png"
+                          : require("../assets/images/selfie.png").default ||
+                            require("../assets/images/selfie.png")
                       }
                       alt=""
                       style={{
@@ -186,7 +164,8 @@ export default function CaptureIdPhoto(props: any) {
                         width: "100vw",
                       }}
                     />
-                  </div> */}
+                  </div>
+
                   <div
                     style={{
                       height: "100vh",
@@ -210,26 +189,7 @@ export default function CaptureIdPhoto(props: any) {
                         justifyContent="center"
                         alignItems="center"
                       >
-                        <Box width={"100%"} mt={6} textAlign="center">
-                          {/* {clinetContext?.theme?.logo && (
-                            <img
-                              src={clinetContext?.theme?.logo}
-                              width={"100px"}
-                              height={"40px"}
-                              style={{ objectFit: "contain" }}
-                              alt={"logo"}
-                            />
-                          )}
-
-                          {!clinetContext?.theme?.logo && (
-                            <Logo
-                              style={{
-                                height: "40px",
-                                width: "100px",
-                              }}
-                            />
-                          )} */}
-                        </Box>
+                        <Box width={"100%"} mt={6} textAlign="center"></Box>
 
                         <Box
                           display={"flex"}
@@ -468,8 +428,12 @@ export default function CaptureIdPhoto(props: any) {
               >
                 <img
                   src={
-                    require("../assets/images/kyc-verify/pattern.png").default ||  require("../assets/images/kyc-verify/pattern.png") ||
-                    undefined
+                    clinetContext?.theme?.nextJSImages
+                      ? "https://facekiassets.faceki.com/public/kyc-verify/pattern.png"
+                      : require("../assets/images/kyc-verify/pattern.png")
+                          .default ||
+                        require("../assets/images/kyc-verify/pattern.png") ||
+                        undefined
                   }
                   alt=""
                   style={{
@@ -516,7 +480,13 @@ export default function CaptureIdPhoto(props: any) {
 
                       {!clinetContext?.theme?.logo && (
                         <img
-                          src={require("../assets/images/kyc-verify/logo_faceki.png").default || require("../assets/images/kyc-verify/logo_faceki.png")}
+                          src={
+                            clinetContext?.theme?.nextJSImages
+                              ? "https://facekiassets.faceki.com/public/kyc-verify/logo_faceki.png"
+                              : require("../assets/images/kyc-verify/logo_faceki.png")
+                                  .default ||
+                                require("../assets/images/kyc-verify/logo_faceki.png")
+                          }
                           style={{
                             height: "40px",
                             width: "100px",
@@ -810,25 +780,7 @@ export default function CaptureIdPhoto(props: any) {
                 display="flex"
                 alignItems={"center"}
                 flexDirection={"column"}
-              >
-                {/*img ? (
-                    <>
-                        <IconButton onClick={() => setImg(undefined)}>
-                            <Repeat
-                                fontSize="large"
-                                color="secondary"
-                            />
-                        </IconButton>
-                        <Typography
-                            sx={{
-                                fontSize: "8px",
-                            }}
-                        >
-                            Retake
-                        </Typography>
-                    </>
-                        ) : undefined */}
-              </Grid>
+              ></Grid>
               <Grid
                 item
                 xs={4}
@@ -899,8 +851,17 @@ export default function CaptureIdPhoto(props: any) {
               flexDirection="row"
               justifyContent="space-between"
             >
-            
-              <img src={require('../assets/images/kyc-verify/footer-logo.png').default || require('../assets/images/kyc-verify/footer-logo.png')} height={25} width={60} />
+              <img
+                src={
+                  clinetContext?.theme?.nextJSImages
+                    ? "https://facekiassets.faceki.com/public/kyc-verify/footer-logo.png"
+                    : require("../assets/images/kyc-verify/footer-logo.png")
+                        .default ||
+                      require("../assets/images/kyc-verify/footer-logo.png")
+                }
+                height={25}
+                width={60}
+              />
             </Box>
           </Box>
         </Card>

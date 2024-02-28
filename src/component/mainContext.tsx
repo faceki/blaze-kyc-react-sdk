@@ -19,6 +19,7 @@ interface theme {
   textBg?: string;
   verificationProcessingText?: string;
   externalTermsUrl?: string;
+  nextJSImages?:boolean
 }
 
 export interface clientContext {

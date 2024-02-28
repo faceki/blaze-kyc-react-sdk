@@ -43,7 +43,10 @@ export default function SelectDocument(props: any) {
               key={i}
               sx={{
                 ...style,
-                borderColor: doc === selectedDoc ? (clinetContext?.theme?.buttonbg || "#f8b427") : "transparent",
+                borderColor:
+                  doc === selectedDoc
+                    ? clinetContext?.theme?.buttonbg || "#f8b427"
+                    : "transparent",
               }}
               onClick={() => {
                 if (!props?.disabled) {
@@ -53,14 +56,29 @@ export default function SelectDocument(props: any) {
             >
               {!props?.disabled && (
                 <Radio
-                  style={{ color: doc === selectedDoc ? (clinetContext?.theme?.buttonbg || "#f8b427"): "" }}
+                  style={{
+                    color:
+                      doc === selectedDoc
+                        ? clinetContext?.theme?.buttonbg || "#f8b427"
+                        : "",
+                  }}
                   checked={doc === selectedDoc}
                 />
               )}
               {props?.disabled && (
                 <p style={{ marginRight: "1rem" }}>{`${i + 1} - `}</p>
               )}
-              <img src={require('../assets/images/kyc-verify/id_card.png').default || require('../assets/images/kyc-verify/id_card.png')} width={50} height={30} />
+              <img
+                src={
+                  clinetContext?.theme?.nextJSImages
+                    ? "https://facekiassets.faceki.com/public/kyc-verify/id_card.png"
+                    : require("../assets/images/kyc-verify/id_card.png")
+                        .default ||
+                      require("../assets/images/kyc-verify/id_card.png")
+                }
+                width={50}
+                height={30}
+              />
               <Typography ml={2} fontWeight={"bold"}>
                 {doc}
               </Typography>

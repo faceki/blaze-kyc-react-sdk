@@ -71,6 +71,33 @@ const App = () => {
 export default App;
 ```
 
+## NextJS
+
+nextJSImages should be True for NextJS Applications
+
+```
+const App = () => {
+  const sdkConfig = {
+    link="your-generated-link", 
+    theme: {
+      nextJSImages: true  
+    },
+    onSuccess: (data) => {
+      console.log("SDK operation successful:", data);
+    },
+    onFail: (data) => {
+      console.error("SDK operation failed:", data);
+    },
+  };
+
+  return <FacekiSDK {...sdkConfig} />;
+};
+
+export default App;
+
+```
+
+
 ## Configurable Props
 
 The `<FacekiSDK>` component accepts the following configurable props:
@@ -110,6 +137,11 @@ The `theme` object can be customized with the following properties:
 - `textBg`: Background color for text elements.
 - `verificationProcessingText`: Text to display during verification processing.
 - `externalTermsUrl`: External Terms and Conditional URL. If you need user to agree on your terms and condition before they continue verification
+- `nextJSImages`: if you are using SDK on NEXTJS App, make sure to pass it as True, if you are facing issue with images.
+
+
+
+
 
 ## Example
 
@@ -125,6 +157,10 @@ Feel free to explore and customize your `<FacekiSDK>` integration! 👩‍💻�
 
 
 ## Change Log
+
+* 2024-02-28 -- 1.0.4
+  * Added Support For NextJS
+
 
 * 2024-02-28 -- 1.0.3
   * Read Me Updates
