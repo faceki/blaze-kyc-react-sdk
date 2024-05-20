@@ -337,10 +337,28 @@ function FacekiSDKWrapper(props: any) {
               clientContext?.onSuccess(res);
             }
           } else {
-            setFailed(true);
-            if (clientContext?.onFail) {
-              clientContext?.onFail(res);
+
+            if (
+              [8004, 8005, 8006, 8007, 8008, 8009, 5004,5005].includes(res?.code)
+            ) {
+             
+              setStepIndex((prevStepIndex) => prevStepIndex - 1);
+              if(res?.code == 5005)
+                {
+                  toast.error("Face MisMatch! Please Try Again");
+                }else{
+                  toast.error("Selfie Liveness Failed! Try Again");
+
+                }
+            } else {
+              setFailed(true);
+              if (clientContext?.onFail) {
+                clientContext?.onFail(res);
+              }
             }
+
+
+            
           }
         })
         .catch((err) => {})
@@ -415,10 +433,17 @@ function FacekiSDKWrapper(props: any) {
               }
             } else {
               if (
-                [8004, 8005, 8006, 8007, 8008, 8009, 5004].includes(res?.code)
+                [8004, 8005, 8006, 8007, 8008, 8009, 5004,5005].includes(res?.code)
               ) {
+               
                 setStepIndex((prevStepIndex) => prevStepIndex - 1);
-                toast.error("Selfie Liveness Failed! Try Again");
+                if(res?.code == 5005)
+                  {
+                    toast.error("Face MisMatch! Please Try Again");
+                  }else{
+                    toast.error("Selfie Liveness Failed! Try Again");
+
+                  }
               } else {
                 setFailed(true);
                 if (clientContext?.onFail) {
