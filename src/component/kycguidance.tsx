@@ -16,7 +16,7 @@ export default function KycVerifyGuidance(props: any) {
       headerText="Verify your identity"
     >
       <Grid
-        item
+        
         direction="column"
         justifyContent="center"
         alignItems="center"

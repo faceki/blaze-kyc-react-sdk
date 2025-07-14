@@ -20,7 +20,7 @@ export default function MainWrapper(props: any) {
     <Card
       style={{
         background: clinetContext.theme?.cardBackgroundColor ?? "white",
-        height: mobileScreen ? "100vh" : undefined,
+        height: mobileScreen ? "100vh" : "100%",
       }}
     >
       <CardContent
@@ -73,8 +73,7 @@ export default function MainWrapper(props: any) {
             container
             flexDirection="column"
             justifyContent={"center"}
-            alignItems="center"
-          >
+            alignItems="center"    width={"100%"} mb={1} >
             <Typography
               variant="h5"
               sx={{

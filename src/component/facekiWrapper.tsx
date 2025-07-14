@@ -29,10 +29,9 @@ import { toast } from "react-toastify";
 var mobile = require("is-mobile");
 function FacekiSDKWrapper(props: any) {
   const clientContext = useClientContext();
-  const {
-    GetWorkFlowsRules,
-    submitKYCRequest,
-  } = useApiService("https://sdk.faceki.com");
+  const { GetWorkFlowsRules, submitKYCRequest } = useApiService(
+    "https://sdk.faceki.com"
+  );
 
   const [dataCapture, setDataCapture] = useState<any>({});
   const [selectedDoc, setSelectedDoc] = useState<any>(null);
@@ -52,129 +51,11 @@ function FacekiSDKWrapper(props: any) {
   useEffect(() => {
     try {
       setFirstLoading(true);
-      // GetKYCRules()
-      //   .then((res) => {
-      //     setDocumentRequired(res.data?.allowedKycDocuments);
-      //     setAllowSingle(res.data?.allowSingle);
-      //     if (!res.data?.allowSingle) {
-      //       let tempArray: any = [];
-      //       tempArray.push(
-      //         <KycVerifyGuidance
-      //           onNext={(img) => {
-      //             setStepIndex((prevStepIndex) => prevStepIndex + 1);
-      //           }}
-      //           onBack={() => {
-      //             setStepIndex((prevStepIndex) => prevStepIndex - 1);
-      //           }}
-      //         />
-      //       );
-
-      //       tempArray.push(
-      //         <StepsCard
-      //           specificMargin={"0"}
-      //           onConfirm={(img) => {
-      //             setStepIndex((prevStepIndex) => prevStepIndex + 1);
-      //           }}
-      //           onBack={() => {
-      //             setStepIndex((prevStepIndex) => prevStepIndex - 1);
-      //           }}
-      //           allowedDocs={res.data?.allowedKycDocuments}
-      //         />
-      //       );
-
-      //       for (
-      //         let index = 0;
-      //         index < res.data?.allowedKycDocuments.length;
-      //         index++
-      //       ) {
-      //         const element = res.data?.allowedKycDocuments[index];
-      //         if (element != "Passport") {
-      //           tempArray.push(
-      //             <CaptureIdPhoto
-      //               documenName={element}
-      //               headerText={"Verify Your " + element}
-      //               side="f"
-      //               onConfirm={(img) => {
-      //                 handleClick(img, element, "front");
-      //               }}
-      //               onBack={() => {
-      //                 setStepIndex((prevStepIndex) => prevStepIndex - 1);
-      //               }}
-      //               onHelpPress={() => {}}
-      //             />
-      //           );
-      //           tempArray.push(
-      //             <CaptureIdPhoto
-      //               documenName={element}
-      //               headerText={"Verify Your " + element}
-      //               side="b"
-      //               onConfirm={(img) => {
-      //                 handleClick(img, element, "back");
-      //               }}
-      //               onBack={() => {
-      //                 setStepIndex((prevStepIndex) => prevStepIndex - 1);
-      //               }}
-      //               onHelpPress={() => {}}
-      //             />
-      //           );
-      //         } else {
-      //           tempArray.push(
-      //             <CaptureIdPhoto
-      //               documenName={element}
-      //               headerText={"Verify Your " + element}
-      //               side="f"
-      //               onConfirm={(img) => {
-      //                 handleClick(img, element, "front");
-      //               }}
-      //               onBack={() => {
-      //                 setStepIndex((prevStepIndex) => prevStepIndex - 1);
-      //               }}
-      //               onHelpPress={() => {}}
-      //             />
-      //           );
-      //         }
-      //       }
-      //       tempArray.push(
-      //         <SelfiePhoto
-      //           documenName={"selfie"}
-      //           headerText={"Take Your Selfie"}
-      //           side="b"
-      //           onConfirm={(img) => {
-      //             setStepIndex((prevStepIndex) => prevStepIndex + 1);
-      //             onSubmit(img);
-      //           }}
-      //           onBack={() => {
-      //             setStepIndex((prevStepIndex) => prevStepIndex - 1);
-      //           }}
-      //           onHelpPress={() => {}}
-      //         />
-      //       );
-      //       setItems(tempArray);
-      //     } else {
-      //       let tempArray: any = [];
-      //       tempArray.push(
-      //         <KycVerifyGuidance
-      //           onNext={(img) => {
-      //             setStepIndex((prevStepIndex) => prevStepIndex + 1);
-      //           }}
-      //           onBack={() => {
-      //             setStepIndex((prevStepIndex) => prevStepIndex - 1);
-      //           }}
-      //         />
-      //       );
-
-      //       setItems(tempArray);
-      //     }
-      //     // setAllowSingle(true)
-      //   })
-      //   .finally(() => {
-      //     setFirstLoading(false);
-      //   });
 
       GetWorkFlowsRules(clientContext.link)
         .then((res) => {
           const { result } = res;
-          setVerificationRules(result)
+          setVerificationRules(result);
           setDocumentRequired(result.documents);
           setAllowSingle(result.document_optional);
           if (!result.document_optional) {
@@ -337,9 +218,22 @@ function FacekiSDKWrapper(props: any) {
               clientContext?.onSuccess(res);
             }
           } else {
-            setFailed(true);
-            if (clientContext?.onFail) {
-              clientContext?.onFail(res);
+            if (
+              [8004, 8005, 8006, 8007, 8008, 8009, 5004, 5005].includes(
+                res?.code
+              )
+            ) {
+              if ([5005].includes(res?.code)) {
+                toast.error("Face Doesn't Match Document! Try Again");
+              } else {
+                toast.error("Selfie Liveness Failed! Try Again");
+              }
+              setStepIndex((prevStepIndex) => prevStepIndex - 1);
+            } else {
+              setFailed(true);
+              if (clientContext?.onFail) {
+                clientContext?.onFail(res);
+              }
             }
           }
         })
@@ -405,7 +299,6 @@ function FacekiSDKWrapper(props: any) {
         formData.append("workflowId", _verificationRules.workflowId);
         formData.append("link", clientContext?.link);
 
-
         submitKYCRequest(formData)
           .then((res) => {
             if (res.result.decision == "ACCEPTED") {
@@ -415,10 +308,16 @@ function FacekiSDKWrapper(props: any) {
               }
             } else {
               if (
-                [8004, 8005, 8006, 8007, 8008, 8009, 5004].includes(res?.code)
+                [8004, 8005, 8006, 8007, 8008, 8009, 5004, 5005].includes(
+                  res?.code
+                )
               ) {
+                if ([5005].includes(res?.code)) {
+                  toast.error("Face Doesn't Match Document! Try Again");
+                } else {
+                  toast.error("Selfie Liveness Failed! Try Again");
+                }
                 setStepIndex((prevStepIndex) => prevStepIndex - 1);
-                toast.error("Selfie Liveness Failed! Try Again");
               } else {
                 setFailed(true);
                 if (clientContext?.onFail) {
@@ -449,7 +348,7 @@ function FacekiSDKWrapper(props: any) {
         <Box
           display="flex"
           alignItems={"center"}
-          width="100%"
+          width={mobileScreen ? "100vw" : "33.33%"}
           flexDirection="column"
         >
           {clientContext?.theme?.logo && (
@@ -499,7 +398,7 @@ function FacekiSDKWrapper(props: any) {
         <Grid
           item
           xs={mobileScreen ? 12 : 4}
-          width={mobileScreen ? "100vw" : ""}
+          width={mobileScreen ? "100vw" : "33.33%"}
           bgcolor={clientContext?.theme?.cardBackgroundColor ?? "white"}
           borderRadius={mobileScreen ? undefined : 40}
           className={!mobileScreen ? "rad" : ""}

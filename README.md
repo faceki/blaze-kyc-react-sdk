@@ -103,6 +103,9 @@ export default App;
 The `<FacekiSDK>` component accepts the following configurable props:
 
 - `link` (required): Your generated link Id from https://docs.faceki.com/api-integration/verification-apis/generate-kyc-link
+
+## USE THE KEY "data" to start the SDK, not the URL key from Response
+
 ```
 {
     "responseCode": 0,
@@ -158,9 +161,12 @@ Feel free to explore and customize your `<FacekiSDK>` integration! 👩‍💻�
 
 ## Change Log
 
+* 2025-07-14 -- 1.0.5
+  * Added Support for React 19
+
+
 * 2024-02-28 -- 1.0.4
   * Added Support For NextJS
-
 
 * 2024-02-28 -- 1.0.3
   * Read Me Updates
